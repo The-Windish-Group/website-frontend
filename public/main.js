@@ -1,19 +1,13 @@
 import "./lib/jquery.js";
 import * as windish from "./lib/windish_general.js";
+import { api } from "./config/api.js"
 
 var urlParams = new URLSearchParams(window.location.search);
-const response = await fetch("./result.json");
+const response = await $.ajax(api + "fromWindish?word=" + urlParams.get("word"))
 
-if (!response.ok) {
-    throw new Error(`HTTP error: ${response.status}`);
-}
-
-const data = await response.json();
+console.log(response)
 
 $("#main-display").text(urlParams.get("word"));
-$("#sound").text(windish.wordToSound(urlParams.get("word")));
-$("#def").text(wordToEnglish(urlParams.get("word")).en);
-
-function wordToEnglish(word) {
-    return data.find((e) => e.wn == word);
-}
+$("#ipa").text(windish.wordToSound(urlParams.get("word")));
+$("#en").text(response.en);
+$("#def").text(response.meaning)

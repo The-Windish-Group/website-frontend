@@ -16,7 +16,7 @@ app.get("/word", (req, res) => {
 // app.status(404).send(`<h1>Page not found</h1>`)
 
 app.listen(8080, () => {
-  console.log('Server is running on port 3000');
+  console.log('Server is running on port 8080');
 });
 
 function public(file) {
